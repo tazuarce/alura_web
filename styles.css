@@ -67,6 +67,13 @@ textarea {
     align-items: stretch;
 }
 
+#resultado{
+    width: 100%;
+    text-wrap: balance;
+    padding: 15% 20%;
+    display: none;
+}
+
 #title {
     margin: 30px;
     overflow-wrap: break-word;
@@ -153,12 +160,7 @@ h1 {
     
 }
 
-#resultado{
-    width: 100%;
-    text-wrap: balance;
-    padding: 20%;
-    display: none;
-}
+
 
 
 
@@ -204,6 +206,7 @@ h1 {
     
     #cat{
         width: 100%;
+        display: none;
     }
 }
 
@@ -237,6 +240,8 @@ h1 {
         align-items: stretch;
     }
 
-
+    #cat {
+        display: none;
+    }
     
 }
