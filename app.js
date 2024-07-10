@@ -1,9 +1,10 @@
 function encriptar() {
     texto = document.getElementById('texto').value;
 
-    /* if(texto == ""){
+    if(texto.length == 0){
         noHayTexto();
-    } */
+        return;
+    }
     
 
     // Aplicamos las reglas de encriptación
@@ -23,18 +24,19 @@ function encriptar() {
     mostrarResultado(textoEncriptado);
 }
 
-/* function noHayTexto(){
+function noHayTexto(){
     desaparecer('resultado');
     let foto = document.getElementById('nomessage');
     foto.style.display = "flex";
-} */
+}
 
 function desencriptar() {
     texto = document.getElementById('texto').value;
     
-    /* if(texto == ""){
+    if(texto.length == 0){
         noHayTexto();
-    } */
+        return;
+    }
 
     // Aplicamos las reglas de encriptación
     let textoDesencriptado = '';
