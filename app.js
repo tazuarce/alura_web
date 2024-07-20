@@ -1,3 +1,11 @@
+const reglasEncriptacion = {
+    'e': 'enter',
+    'i': 'imes',
+    'a': 'ai',
+    'o': 'ober',
+    'u': 'ufat'
+};
+
 function encriptar() {
     texto = document.getElementById('texto').value;
 
@@ -12,23 +20,14 @@ function encriptar() {
     let letra;
     for (let i = 0 ; i < texto.length ; i++) {
         letra = texto[i];
-        if (reglasEncriptacion.hasOwnProperty(letra)) {
-            textoEncriptado += reglasEncriptacion[letra];
-        } else {
-            textoEncriptado += letra;
-        }
-        console.log(textoEncriptado);
+        textoEncriptado += (letra in reglasEncriptacion)? reglasEncriptacion[letra] : letra;
+        /* console.log(textoEncriptado); */
     }
 
     desaparecer('nomessage');
     mostrarResultado(textoEncriptado);
 }
 
-function noHayTexto(){
-    desaparecer('resultado');
-    let foto = document.getElementById('nomessage');
-    foto.style.display = "flex";
-}
 
 function desencriptar() {
     texto = document.getElementById('texto').value;
@@ -37,41 +36,40 @@ function desencriptar() {
         noHayTexto();
         return;
     }
-
+    
     // Aplicamos las reglas de encriptación
     let textoDesencriptado = '';
     let letra;
     for (let i = 0 ; i < texto.length ; i++) {
         letra = texto[i];
         textoDesencriptado += letra;
-        if (reglasEncriptacion.hasOwnProperty(letra) && estaEncriptado(i,texto)) {
+        if (letra in reglasEncriptacion && estaEncriptado(i,texto)) {
             i += reglasEncriptacion[texto[i]].length - 1;
         }
-        console.log(textoDesencriptado);
+        /* console.log(textoDesencriptado); */
     }
-
+    
     desaparecer('nomessage');
     mostrarResultado(textoDesencriptado);
 }
 
-function estaEncriptado(i, texto){
-    let supuestaCriptacion = reglasEncriptacion[i];
-    let length = supuestaCriptacion;
+function estaEncriptado(pos, texto){
+    let supuestaEncriptacion = reglasEncriptacion[texto[pos]];
     let res = true;
-    for(let j = 0 ; j < length ; j++){
-        res = (texto[i+j] == supuestaCriptacion[j])? res : false;
+    for(let i = 0 ; i < supuestaEncriptacion.length ; i++){
+        if(texto[pos+i] != supuestaEncriptacion[i]){
+            res = false
+        }
     }
-
+    
     return res;
 }
 
-const reglasEncriptacion = {
-    'e': 'enter',
-    'i': 'imes',
-    'a': 'ai',
-    'o': 'ober',
-    'u': 'ufat'
-};
+function noHayTexto(){
+    desaparecer('resultado');
+    let foto = document.getElementById('nomessage');
+    foto.style.display = "flex";
+}
 
 function desaparecer(id){
     let foto = document.getElementById(id);
@@ -86,20 +84,4 @@ function mostrarResultado(texto){
     let respuesta = document.getElementById("resultado");
     respuesta.innerText = texto;
     aparecer('resultado')
-}
-
-var encriptacion = {
-    "e": "enter",
-    "i": "imes",
-    "a": "ai",
-    "o": "ober",
-    "u": "ufat"
-}
-
-var desencriptacion = {
-
-}
-
-String.prototype.replaceAt = function(index, replacement) {
-    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
 }
